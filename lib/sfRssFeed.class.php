@@ -211,6 +211,7 @@ class sfRssFeed extends sfFeed
       $xml[] = '      <height>'.$this->getImage()->getImageY().'</height>';
       $xml[] = '    </image>';
     }
+
     if(strpos($this->version, '2.') !== false)
     {
       if(is_array($this->getCategories()))
@@ -221,6 +222,38 @@ class sfRssFeed extends sfFeed
         }
       }
     }
+
+    if($this instanceof sfRss201PodcastFeed)
+    {
+        // $xml[] = '    <itunes:category text="Games &amp; Hobbies">';
+        // $xml[] = '    <itunes:category text="Video Games" />';
+        // $xml[] = '    </itunes:category>';
+        // $xml[] = '    <itunes:category text="Technology" />';
+        // $xml[] = '    <itunes:explicit>no</itunes:explicit>';
+        $xml[] = '    <itunes:summary>'.$this->getDescription().'</itunes:summary>';
+        $xml[] = '    <itunes:subtitle>'.$this->getDescription().'</itunes:subtitle>';
+        if ($this->getAuthorName())
+        {
+            $xml[] = '    <itunes:author>'.$this->getAuthorName().'</itunes:author>';
+        }
+        $xml[] = '    <itunes:owner>';
+        if ($this->getAuthorEmail())
+        {
+            $xml[] = '        <itunes:email>'.$this->getAuthorEmail().'</itunes:email>';
+        }
+        if ($this->getAuthorName())
+        {
+            $xml[] = '        <itunes:name>'.$this->getAuthorName().'</itunes:name>';
+        }
+        $xml[] = '    </itunes:owner>';
+        if ($this->getImage())
+        {
+            $xml[] = '    <itunes:image href="'.$this->getImage()->getImage().'" />';
+        }
+        // $xml[] = '    <itunes:keywords>Not implemented</itunes:keywords>';
+    }
+
+
     $xml[] = implode("\n", $this->getFeedElements());
     $xml[] = '  </channel>';
     $xml[] = '</rss>';
