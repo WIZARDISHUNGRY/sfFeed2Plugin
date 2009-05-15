@@ -239,16 +239,19 @@ class sfRssFeed extends sfFeed
         {
             $xml[] = '    <itunes:author>'.$this->getAuthorName().'</itunes:author>';
         }
-        $xml[] = '    <itunes:owner>';
-        if ($this->getAuthorEmail())
-        {
-            $xml[] = '        <itunes:email>'.$this->getAuthorEmail().'</itunes:email>';
+         if ($this->getAuthorEmail()||$this->getAuthorName())
+         {
+            $xml[] = '    <itunes:owner>';
+            if ($this->getAuthorEmail())
+            {
+                $xml[] = '        <itunes:email>'.$this->getAuthorEmail().'</itunes:email>';
+            }
+            if ($this->getAuthorName())
+            {
+                $xml[] = '        <itunes:name>'.$this->getAuthorName().'</itunes:name>';
+            }
+            $xml[] = '    </itunes:owner>';
         }
-        if ($this->getAuthorName())
-        {
-            $xml[] = '        <itunes:name>'.$this->getAuthorName().'</itunes:name>';
-        }
-        $xml[] = '    </itunes:owner>';
         if ($this->getImage())
         {
             $xml[] = '    <itunes:image href="'.$this->getImage()->getImage().'" />';
