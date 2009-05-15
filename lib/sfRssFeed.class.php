@@ -303,6 +303,17 @@ class sfRssFeed extends sfFeed
           $xml[] = '      <comments>'.htmlspecialchars($item->getComments()).'</comments>';
         }
 
+        
+        if($this instanceof sfRss201PodcastFeed)
+        {
+            //$xml[] = '    <itunes:explicit>no</itunes:explicit>';
+            //$xml[] = '    <itunes:keywords>iphone, excitebots, trixel, wolverine, demigod, x-men, dan hsu, philip kollar, sterling mcgarvey</itunes:keywords>';
+            $xml[] = '    <itunes:author>'.$item->getAuthorName().'</itunes:author>';
+            //$xml[] = '    <itunes:subtitle>';
+            //$xml[] = '    X-Men Origins: Wolverine, Demigod, Excitebots: Trick Racing, Trixel. We make it up to Jason for leaving him behind last week whine reminiscing about our recent gaming conquests.';
+            //$xml[] = '    </itunes:subtitle>';
+        }
+
         // enclosure
         if ($enclosure = $item->getEnclosure())
         {
