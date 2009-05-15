@@ -184,7 +184,10 @@ class sfRssFeed extends sfFeed
     $this->initContext();
     $xml = array();
     $xml[] = '<?xml version="1.0" encoding="'.$this->getEncoding().'" ?>';
-    $xml[] = '<rss version="'.$this->getVersion().'" xmlns:content="http://purl.org/rss/1.0/modules/content/">';
+    $xml[] = '<rss version="'.$this->getVersion().'" xmlns:content="http://purl.org/rss/1.0/modules/content/"'
+        .($this instanceof sfRss201PodcastFeed?' xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" '.
+            'xmlns:media="http://search.yahoo.com/mrss/"':'')
+        .'>';
     $xml[] = '  <channel>';
     $xml[] = '    <title>'.$this->getTitle().'</title>';
     $xml[] = '    <link>'.$this->context->getController()->genUrl($this->getLink(), true).'</link>';
