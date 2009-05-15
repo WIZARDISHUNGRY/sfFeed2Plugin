@@ -330,7 +330,7 @@ class sfRssFeed extends sfFeed
             $xml[] = '      <media:content duration="' /*TODO*/.'" medium="' /*TODO*/.
                 '" fileSize="'.$enclosure->getLength().
                 '" url="'.$enclosure->getUrl().'" type="'.$enclosure->getMimeType().'">';
-            $xml[] = '      <media:title>![CDATA['.$item->getTitle().']]></media:title>';
+            $xml[] = '      <media:title><![CDATA['.$item->getTitle().']]></media:title>';
             if ($item->getDescription())
             {
               $xml[] = '      <media:description><![CDATA['.$item->getDescription().']]></media:description>';
