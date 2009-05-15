@@ -239,8 +239,8 @@ class sfRssFeed extends sfFeed
         {
             $xml[] = '    <itunes:author>'.$this->getAuthorName().'</itunes:author>';
         }
-         if ($this->getAuthorEmail()||$this->getAuthorName())
-         {
+        if ($this->getAuthorEmail()||$this->getAuthorName())
+        {
             $xml[] = '    <itunes:owner>';
             if ($this->getAuthorEmail())
             {
