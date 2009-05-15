@@ -304,14 +304,14 @@ class sfRssFeed extends sfFeed
         }
 
         
-        if($this instanceof sfRss201PodcastFeed)
+        if($this instanceof sfRss201PodcastFeed) // this block is simply metainfo
         {
-            //$xml[] = '    <itunes:explicit>no</itunes:explicit>';
-            //$xml[] = '    <itunes:keywords>iphone, excitebots, trixel, wolverine, demigod, x-men, dan hsu, philip kollar, sterling mcgarvey</itunes:keywords>';
-            $xml[] = '    <itunes:author>'.$item->getAuthorName().'</itunes:author>';
-            //$xml[] = '    <itunes:subtitle>';
-            //$xml[] = '    X-Men Origins: Wolverine, Demigod, Excitebots: Trick Racing, Trixel. We make it up to Jason for leaving him behind last week whine reminiscing about our recent gaming conquests.';
-            //$xml[] = '    </itunes:subtitle>';
+            //$xml[] = '      <itunes:explicit>no</itunes:explicit>';
+            //$xml[] = '      <itunes:keywords>iphone, excitebots, trixel, wolverine, demigod, x-men, dan hsu, philip kollar, sterling mcgarvey</itunes:keywords>';
+            $xml[] = '      <itunes:author>'.$item->getAuthorName().'</itunes:author>';
+            //$xml[] = '      <itunes:subtitle>';
+            //$xml[] = '        X-Men Origins: Wolverine, Demigod, Excitebots: Trick Racing, Trixel. We make it up to Jason for leaving him behind last week whine reminiscing about our recent gaming conquests.';
+            //$xml[] = '      </itunes:subtitle>';
         }
 
         // enclosure
@@ -319,6 +319,22 @@ class sfRssFeed extends sfFeed
         {
           $enclosure_attributes = sprintf('url="%s" length="%s" type="%s"', $enclosure->getUrl(), $enclosure->getLength(), $enclosure->getMimeType());
           $xml[] = '      <enclosure '.$enclosure_attributes.'></enclosure>';
+          if($this instanceof sfRss201PodcastFeed) // MediaRSS support
+          {
+            $xml[] = '      <media:content duration="' /*TODO*/.'" medium="' /*TODO*/.
+                '" fileSize="'.$enclosure->getLength().
+                '" url="'.$enclosure->getUrl().'" type="'.$enclosure->getMimeType().'">';
+            $xml[] = '      <media:title>![CDATA['.$item->getTitle().']]></media:title>';
+            if ($item->getDescription())
+            {
+              $xml[] = '      <media:description><![CDATA['.$item->getDescription().']]></media:description>';
+            }
+            //$xml[] = '      <media:thumbnail url="http://example.com/todo.gif" width="100" height="100" />';
+            //$xml[] = '      <media:player url="http://example.com/flash/player" />';
+            //$xml[] = '      <media:rating>nonadult</media:rating>';
+            //$xml[] = '      <media:keywords>keywords here todo</media:keywords>';
+            $xml[] = '    </media:content>';
+          }
         }
 
         // categories
