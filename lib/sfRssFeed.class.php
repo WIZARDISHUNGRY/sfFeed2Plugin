@@ -304,7 +304,7 @@ class sfRssFeed extends sfFeed
         {
           $xml[] = '      <pubDate>'.date(DATE_RSS, $item->getPubdate()).'</pubDate>';
         }
-        if (is_string($item->getComments()))
+        if ($item->getComments())
         {
           $xml[] = '      <comments>'.htmlspecialchars($item->getComments()).'</comments>';
         }
