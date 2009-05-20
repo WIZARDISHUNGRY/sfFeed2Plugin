@@ -25,6 +25,7 @@ class sfFeed
     $image,
     $title,
     $link,
+    $generator='http://www.symfony-project.org/',
     $description,
     $language = 'en',
     $authorEmail,
@@ -56,6 +57,7 @@ class sfFeed
     $this->setImage(isset($feed_array['image']) ? $feed_array['image'] : '');
     $this->setTitle(isset($feed_array['title']) ? $feed_array['title'] : '');
     $this->setLink(isset($feed_array['link']) ? $feed_array['link'] : '');
+    $this->setGenerator(isset($feed_array['generator']) ? $feed_array['generator'] : '');
     $this->setDescription(isset($feed_array['description']) ? $feed_array['description'] : '');
     $this->setLanguage(isset($feed_array['language']) ? $feed_array['language'] : $this->language);
     $this->setAuthorEmail(isset($feed_array['authorEmail']) ? $feed_array['authorEmail'] : '');
@@ -221,6 +223,16 @@ class sfFeed
   public function getLink ()
   {
     return $this->link;
+  }
+
+  public function setGenerator ($link)
+  {
+    $this->generator = $link;
+  }
+
+  public function getGenerator ()
+  {
+    return $this->generator;
   }
 
   public function setDescription ($description)

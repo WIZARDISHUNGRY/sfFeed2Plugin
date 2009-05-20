@@ -192,6 +192,7 @@ class sfRssFeed extends sfFeed
     $xml[] = '    <title>'.$this->getTitle().'</title>';
     $xml[] = '    <link>'.$this->context->getController()->genUrl($this->getLink(), true).'</link>';
     $xml[] = '    <description>'.$this->getDescription().'</description>';
+    $xml[] = '    <generator>'.$this->context->getController()->genUrl($this->getGenerator(), true).'</generator>';
     $xml[] = '    <pubDate>'.date(DATE_RSS, $this->getLatestPostDate()).'</pubDate>';
     if ($this->getAuthorEmail())
     {
